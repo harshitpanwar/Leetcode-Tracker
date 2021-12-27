@@ -1,0 +1,71 @@
+.body{
+  margin : 0;
+}
+
+.Header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: rgba(84,138,144,0.7);
+  margin: 0;
+}
+
+h3{
+  color: #013B45;
+  margin-left: 50px;
+  margin-right: 100px;
+  
+}
+p{
+  color: #013B45;
+  margin-left: 100px;
+}
+
+.search {
+    margin-top: 10px;
+    margin-right: 70px;
+
+}
+.searchtext{
+  color: #013B45;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color:#013B45;
+  opacity: 1; /* Firefox */
+}
+
+
+.items {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: left;
+  
+  
+}
+
+input {
+  width: 370px;
+  padding: 10px 5px;
+  float: left;
+  color: #013B45;
+  border: 1px solid #013b45;
+  background: transparent;
+  border-radius: 3px 0 0 3px;
+
+}
+button {
+  position: relative;
+  float: right;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  height: 40px;
+  width: 120px;
+  color: #013B45;
+  background: transparent;
+  border-left: 1px solid #013B45;
+  border-radius: 0 3px 3px 0;
+
+}
