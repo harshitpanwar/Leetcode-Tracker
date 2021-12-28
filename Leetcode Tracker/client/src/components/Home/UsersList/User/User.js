@@ -32,6 +32,18 @@ function User() {
                     </div>
                 </div>
 
+                <div className='otherInfo'>
+                    <div>
+                        <p>Acceptance</p>
+                        <p>66.5%</p>
+                    </div>
+                    <div>
+                        <p>Total Submissions</p>
+                        <p>250</p>
+
+                    </div>
+                </div>
+
             </div>
 
 

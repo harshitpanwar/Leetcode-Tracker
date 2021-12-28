@@ -22,8 +22,17 @@
 
 }
 
+.otherInfo{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-right: 30px;
+}
 
-
+.otherInfo p{
+    margin-right: 20px;
+}
 
 
 .header{
