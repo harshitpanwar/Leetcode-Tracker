@@ -1,0 +1,68 @@
+.top{
+    justify-content: center;
+    align-items: center;
+    display:flex;
+}
+
+.user{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center !important;
+    align-items: center;
+    border: 1px solid rgb(70, 60, 60,0.7);
+    border-radius: 5px;
+    margin:10px;
+    background-color: rgb(242,243,245,0.4);
+    padding:0%;
+    width: fit-content;
+    padding-left: 30px;
+    
+    
+
+}
+
+
+
+
+
+.header{
+    display: flex;
+    flex-direction: row;
+    margin-right: 10px;
+    align-items: center;
+}
+
+.header p{
+    color: royalblue;
+    margin-right: 10px;
+}
+
+.questions{
+    display: flex;
+    flex-direction: row;
+
+}
+
+.que{
+    text-align: center;
+    margin-right: 30px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+
+
+.easy p{
+    color: green;
+    
+
+}
+
+.medium p{
+    color: orange;
+}
+
+.hard p{
+    color: red;
+}
+
