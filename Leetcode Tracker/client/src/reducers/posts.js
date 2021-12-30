@@ -1,4 +1,4 @@
-export default (posts = [], action) => {
+export default (posts=['hello'], action) => {
     switch(action.type){
 
         case 'FETCH_ALL':

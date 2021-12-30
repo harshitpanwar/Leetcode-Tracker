@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import React from 'react';
 import './Header.css';
 
@@ -11,19 +12,25 @@ function Header() {
 
                 <div className='pi'>
                     <p>
-                    Home
+                        <Link className='pi' to='/'>
+                            Home
+                        </Link>
                     </p>
                     
                 </div>
                 <div className='pi'>
                 <p>
-                    <img height={'20px'} src='https://htxt.co.za/wp-content/uploads/2018/11/github-logo.jpg'></img>
-                    Contribute
+                    {/* <img height={'20px'} src='https://htxt.co.za/wp-content/uploads/2018/11/github-logo.jpg'></img> */}
+                        <a className='pi' href='https://www.github.com/harshitpanwar/Leetcode-Tracker/' >
+                            Contribute
+                        </a>    
                 </p>
                 </div>
                 <div className='pi'>
                     <p>
-                    About
+                        <Link className='pi' to='/about'>
+                            About
+                        </Link>
                     </p>
                     
                 </div>
