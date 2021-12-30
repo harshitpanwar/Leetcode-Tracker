@@ -2,12 +2,10 @@ import mongoose from "mongoose";
 
 const postSchema = mongoose.Schema({
 
-    userName : String,
-    easy : String,
-    medium : String,
-    hard : String,
-    Acceptance : String,
-    Total_Submissions : String,    
+    name : String,
+    username : String,
+    gender : String,
+ 
 
 });
 
