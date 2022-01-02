@@ -19,16 +19,16 @@ const User = ( {post} ) => {
             <div className='questions'>
                 <div className='que easy'>
                     <p>Easy</p>
-                    <p>140</p>
+                    <p>{post.Easy}</p>
 
                 </div>
                 <div className='que medium'>
                     <p>Medium</p>
-                    <p>90</p>
+                    <p>{post.Medium}</p>
                 </div>
                 <div className='que hard'>
                     <p>Hard</p>
-                    <p>19</p>
+                    <p>{post.Hard}</p>
                 </div>
             </div>
 

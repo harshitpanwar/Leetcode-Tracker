@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const postSchema = mongoose.Schema({
+const userSchema = mongoose.Schema({
 
     name : String,
     username : String,
@@ -10,10 +10,8 @@ const postSchema = mongoose.Schema({
     Hard : String,
  
 
- 
-
 });
 
-const PostMessage = mongoose.model('PostMessage', postSchema);
+const UserData = mongoose.model('userData', userSchema);
 
-export default PostMessage;
+export default UserData;

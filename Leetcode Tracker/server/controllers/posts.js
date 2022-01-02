@@ -1,10 +1,11 @@
 import PostMessage from "../models/postMessage.js";
+import UserData from "../models/userData.js";
 
 
 export const getPosts = async (req, res) => {
     try {
         
-        const postMessages = await PostMessage.find();
+        const postMessages = await PostMessage.find({ Medium: { $exists:true }});
         console.log(postMessages);
         res.status(200).json(postMessages)
 
@@ -27,11 +28,10 @@ export const createPost = async (req, res) =>{
 
         res.status(201).json(newPost);
         
-        } 
-    catch (error) {
-        
-        console.log(error.message)
+    } catch (error) {
         res.status(409).json({message: error.message});
         
-        }
+    }
+
+
 }
