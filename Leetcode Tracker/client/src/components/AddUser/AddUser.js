@@ -17,6 +17,7 @@ const AddUser = () => {
             e.preventDefault();
             dispatch(createPost(postData));
             console.log(postData);
+            console.log(e)
         }
         catch(error){
             console.log(error)
