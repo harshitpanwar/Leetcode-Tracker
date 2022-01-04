@@ -5,13 +5,25 @@ import { useSelector } from 'react-redux';
 const User = ( {post} ) => {
 
 
+    const UserProfile = () => {
+        if(post.gender=='Male'){
+            return(<img src='https://cdn-icons-png.flaticon.com/512/2922/2922510.png' height={'40px'}/>)
+        }
+
+        else{
+            return(<img src='https://cdn-icons-png.flaticon.com/512/2922/2922561.png' height={'40px'}/>)
+        }
+    }
+
+
     return (
         <div className='top'>
         <div className='user'>
 
             <div className='header'>
-                <img src='https://cdn-icons-png.flaticon.com/512/2922/2922510.png' height={'40px'}/>
-            
+
+             <UserProfile/>
+
                 <p>{post.username}</p>
             </div>
 
@@ -19,27 +31,27 @@ const User = ( {post} ) => {
             <div className='questions'>
                 <div className='que easy'>
                     <p>Easy</p>
-                    <p>{post.Easy}</p>
+                    <p>{post.easy}</p>
 
                 </div>
                 <div className='que medium'>
                     <p>Medium</p>
-                    <p>{post.Medium}</p>
+                    <p>{post.medium}</p>
                 </div>
                 <div className='que hard'>
                     <p>Hard</p>
-                    <p>{post.Hard}</p>
+                    <p>{post.hard}</p>
                 </div>
             </div>
 
             <div className='otherInfo'>
                 <div>
                     <p>Acceptance</p>
-                    <p>66.5%</p>
+                    <p>{post.acceptance}</p>
                 </div>
                 <div>
                     <p>Total Submissions</p>
-                    <p>250</p>
+                    <p>{post.submissions}</p>
 
                 </div>
             </div>
