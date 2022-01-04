@@ -16,15 +16,19 @@ const User = ( {post} ) => {
     }
 
 
+        var url = 'https://leetcode.com/'+post.username+'/';
+
+
+
     return (
         <div className='top'>
         <div className='user'>
 
             <div className='header'>
 
-             <UserProfile/>
+                <UserProfile/>
 
-                <p>{post.username}</p>
+                <a href={url}>{post.username}</a>
             </div>
 
 
