@@ -17,6 +17,7 @@ const User = ( {post} ) => {
 
 
         var url = 'https://leetcode.com/'+post.username+'/';
+        var score = parseInt(post.easy) + parseInt(post.medium) * 2 + parseInt(post.hard) * 4;
 
 
 
@@ -57,6 +58,10 @@ const User = ( {post} ) => {
                     <p>Total Submissions</p>
                     <p>{post.submissions}</p>
 
+                </div>
+                <div>
+                    <p>Total Score</p>
+                    <p>{score}</p>
                 </div>
             </div>
 
