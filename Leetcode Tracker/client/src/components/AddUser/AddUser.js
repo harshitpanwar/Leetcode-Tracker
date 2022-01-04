@@ -11,13 +11,11 @@ const AddUser = () => {
 
     const dispatch = useDispatch();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
 
         try{
             e.preventDefault();
             dispatch(createPost(postData));
-            console.log(postData);
-            console.log(e)
         }
         catch(error){
             console.log(error)
@@ -55,4 +53,4 @@ const AddUser = () => {
     )
 }
 
-export default AddUser
+export default AddUser;

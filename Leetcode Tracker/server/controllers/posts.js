@@ -5,7 +5,7 @@ import UserData from "../models/userData.js";
 export const getPosts = async (req, res) => {
     try {
         
-        const postMessages = await PostMessage.find({ Medium: { $exists:true }});
+        const postMessages = await PostMessage.find({ medium: { $exists:true }});
         console.log(postMessages);
         res.status(200).json(postMessages)
 
