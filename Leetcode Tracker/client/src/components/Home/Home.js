@@ -9,7 +9,7 @@ function Home() {
         <>
             <Grid container justifyContent='space-between' alignItems='stretch' spacing={3}>
 
-                <Grid item xs={12} sm={8}>
+                <Grid item xs={8} sm={8}>
 
                     <UsersList/>
 
