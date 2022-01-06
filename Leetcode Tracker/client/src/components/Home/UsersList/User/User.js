@@ -7,11 +7,11 @@ const User = ( {post} ) => {
 
     const UserProfile = () => {
         if(post.gender=='Male'){
-            return(<img src='https://cdn-icons-png.flaticon.com/512/2922/2922510.png' height={'40px'}/>)
+            return(<img src='https://cdn-icons-png.flaticon.com/512/1306/1306286.png' height={'40px'}/>)
         }
 
         else{
-            return(<img src='https://cdn-icons-png.flaticon.com/512/2922/2922561.png' height={'40px'}/>)
+            return(<img src='https://cdn-icons-png.flaticon.com/512/1306/1306286.png' height={'40px'}/>)
         }
     }
 

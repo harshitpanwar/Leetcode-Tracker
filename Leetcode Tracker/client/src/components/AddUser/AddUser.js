@@ -6,7 +6,7 @@ import './AddUser.css'
 const AddUser = () => {
 
     const [postData, setPostData] = useState({
-        name : '', username : '' , gender : ''
+        name : '', username : '' 
     });
 
     const dispatch = useDispatch();
@@ -38,12 +38,12 @@ const AddUser = () => {
 
             <br/>
 
-            <label>Gender</label>
+            {/* <label>Gender</label>
                 <select id="gender" name="gender" placeholder="Name.." value={postData.gender} onChange={(e) => setPostData({...postData, gender : e.target.value })}>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                     <option value="None">Rather Not Say</option>
-                </select>
+                </select> */}
 
             <input type="submit" value="submit"/>
 
