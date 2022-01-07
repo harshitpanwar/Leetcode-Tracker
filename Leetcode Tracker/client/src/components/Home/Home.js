@@ -3,6 +3,7 @@ import {Container,Grid} from '@material-ui/core';
 import UsersList from './UsersList/UsersList';
 import WeeklyTop from './WeeklyTop/WeeklyTop'
 import User from './UsersList/User/User';
+import './Home.css'
 function Home() {
     return (
      

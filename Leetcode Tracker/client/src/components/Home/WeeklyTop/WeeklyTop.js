@@ -3,7 +3,7 @@ import React from 'react'
 function WeeklyTop() {
     return (
         <div>
-            WeeklyTp
+            Weekly Tips
         </div>
     )
 }

@@ -1,4 +1,4 @@
-.body{
+/* .body{
   margin : 0;
 }
 
@@ -107,4 +107,42 @@ button {
   border-left: 1px solid #013B45;
   border-radius: 0 3px 3px 0;
 
+} */
+header {
+  background-color: rgb(34, 50, 65);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  display: flex;
+  align-items: center;
 }
+header * {
+  display: inline;
+  color: white;
+  font-family: 'Dancing Script', cursive;
+}
+header li {
+  margin: 20px;
+;
+}
+
+.Brand{
+  font-family: 'Dancing Script', cursive;
+}
+.search{
+  margin-left: 400px;
+  padding: 0px;
+}
+.searchButton
+{
+  color: black;
+  background-color: green;
+}
+/* nav
+{
+  display:flex ;
+  flex-direction: row;
+  justify-content: space-between;
+} */
