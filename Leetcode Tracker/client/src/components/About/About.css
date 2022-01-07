@@ -1,0 +1,30 @@
+.intro
+{
+    text-align: center;
+    font-size: large;
+}
+
+.Technologies
+{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: large;
+    
+    
+}
+
+.techImg img
+{
+    justify-content: center;
+    text-align: center;
+
+
+}
+
+.developers 
+{
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+}
