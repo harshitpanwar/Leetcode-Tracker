@@ -140,6 +140,21 @@ header li {
   color: black;
   background-color: green;
 }
+
+.searchtext{
+  padding: 10px;
+  border-radius: 5px;
+  color: #000;
+}
+
+.searchButton{
+  padding: 9px;
+  border-radius: 5px;
+}
+
+::placeholder { 
+  opacity: 1; 
+}
 /* nav
 {
   display:flex ;
