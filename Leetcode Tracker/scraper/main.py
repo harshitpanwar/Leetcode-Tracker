@@ -4,6 +4,7 @@ from pymongo import MongoClient
 from selenium.webdriver import Chrome
 import time
 from selenium.webdriver import ChromeOptions
+from selenium.webdriver.common.by import By
 
 options = ChromeOptions()
 options.headless = True
@@ -30,57 +31,74 @@ def getUserInfo(user):
 
         driver.get('https://leetcode.com/' + user)
 
-        time.sleep(20)
+        time.sleep(5)
 
-        element = driver.find_element_by_class_name("total-solved-count__2El1")
+        total = driver.find_element(By.XPATH, "/html/body/div[1]/div/div/div/div[2]/div[1]/div[1]/div/div[2]/div[1]/div/div/div/div[1]").text
+        # print(element.text)
+        # info = driver.find_element_by_class_name("total-solved-container__1WZP")
 
-        info = driver.find_element_by_class_name("total-solved-container__1WZP")
+        # information = info.text
 
-        information = info.text
+        # splited_info = information.split('\n')
 
-        splited_info = information.split('\n')
+        easy = driver.find_element(By.XPATH, "/html/body/div/div/div/div/div[2]/div[1]/div[1]/div/div[2]/div[2]/div[1]/div[1]/div[2]/span[1]").text
 
-        c = 0
-        easy = ""
-        medium = ""
-        hard = ""
+        medium = driver.find_element(By.XPATH, "/html/body/div/div/div/div/div[2]/div[1]/div[1]/div/div[2]/div[2]/div[2]/div[1]/div[2]/span[1]").text
 
-        for i in splited_info:
-            c = c + 1
-            if c % 2 == 0:
-                if c == 2:
-                    easy = i[0:-3]
-                if c == 4:
-                    medium = i[0:-4]
-                if c == 6:
-                    hard = i[0:-3]
+        hard = driver.find_element(By.XPATH, "/html/body/div/div/div/div/div[2]/div[1]/div[1]/div/div[2]/div[2]/div[3]/div[1]/div[2]/span[1]").text
 
-        acceptance = driver.find_element_by_class_name("css-1b3bb7o-PercentNumber")
-        submissions = driver.find_element_by_xpath("(//div[@class='ant-card-head-title'])[4]").text
+        # for i in splited_info:
+        #     c = c + 1
+        #     if c % 2 == 0:
+        #         if c == 2:
+        #             easy = i[0:-3]
+        #         if c == 4:
+        #             medium = i[0:-4]
+        #         if c == 6:
+        #             hard = i[0:-3]
 
-        sub = ""
+        submissions = driver.find_element(By.XPATH,"/html/body/div/div/div/div/div[2]/div[2]/div/div[1]/div[1]/span[1]").text
 
-        for i in submissions:
-            if i == ' ':
-                break
-            else:
-                sub = sub + i
+        # sub = ""
+        #
+        # for i in submissions:
+        #     if i == ' ':
+        #         break
+        #     else:
+        #         sub = sub + i
 
-        print(element.text)
+        print(total)
         print(easy)
         print(medium)
         print(hard)
-        # print(hard.text)
-        print(acceptance.text)
-        print(sub)
+        print(submissions)
+        acceptance = "100%"
 
         # updating the database here
 
         collection.update_one({"username": user}, {
-            "$set": {"easy": easy, "medium": medium, "hard": hard, "acceptance": acceptance.text, "submissions": sub}})
+            "$set": {"easy": easy, "medium": medium, "hard": hard, "acceptance": acceptance, "submissions": submissions}})
 
     except Exception as e:
         print(str(e))
+        total = driver.find_element(By.XPATH, "/html/body/div[1]/div/div/div/div[2]/div[3]/div[1]/div/div[2]/div[1]/div/div/div/div[1]").text
+        easy = driver.find_element(By.XPATH,
+                                   "/html/body/div[1]/div/div/div/div[2]/div[3]/div[1]/div/div[2]/div[2]/div[1]/div[1]/div[2]/span[1]").text
+
+        medium = driver.find_element(By.XPATH,
+                                   "/html/body/div[1]/div/div/div/div[2]/div[3]/div[1]/div/div[2]/div[2]/div[2]/div[1]/div[2]/span[1]").text
+        hard = driver.find_element(By.XPATH,"/html/body/div[1]/div/div/div/div[2]/div[3]/div[1]/div/div[2]/div[2]/div[3]/div[1]/div[2]/span[1]").text
+        submissions = driver.find_element(By.XPATH,"/html/body/div[1]/div/div/div/div[2]/div[4]/div/div[1]/div[1]/span[1]").text
+        acceptance = "100%"
+        print(total)
+        print(easy)
+        print(medium)
+        print(hard)
+        print(submissions)
+        collection.update_one({"username": user}, {
+            "$set": {"easy": easy, "medium": medium, "hard": hard, "acceptance": acceptance,
+                     "submissions": submissions}})
+
 
 
 def Reverse(lst):

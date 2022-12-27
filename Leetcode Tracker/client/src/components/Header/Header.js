@@ -15,7 +15,9 @@ function Header() {
                      </Link>
                 </li>
                 <li >
-                    <a href='https://github.com/harshitpanwar/Leetcode-Tracker'>Contribute</a>
+                    <a href='https://github.com/harshitpanwar/Leetcode-Tracker'
+                    >Contribute
+                    </a>
                 </li>
                 <li>
                 <Link  to='/about'>

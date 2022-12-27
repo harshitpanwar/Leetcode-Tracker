@@ -3,6 +3,9 @@ import { useDispatch } from 'react-redux';
 import { createPost } from '../../actions/posts';
 import './AddUser.css'
 
+
+var temp = "";
+
 const AddUser = () => {
 
     const [postData, setPostData] = useState({
@@ -11,11 +14,20 @@ const AddUser = () => {
 
     const dispatch = useDispatch();
 
+    const setNameAndUsername = () =>{
+        var name = document.getElementById("name");
+        name.value = "";
+        var username = document.getElementById("username");
+        username.value = "";
+        document.getElementById("success").innerHTML = "User Added Successfully";
+    }
+
     const handleSubmit = async (e) => {
 
         try{
             e.preventDefault();
             dispatch(createPost(postData));
+            setNameAndUsername();
         }
         catch(error){
             console.log(error)
@@ -38,16 +50,14 @@ const AddUser = () => {
 
             <br/>
 
-            {/* <label>Gender</label>
-                <select id="gender" name="gender" placeholder="Name.." value={postData.gender} onChange={(e) => setPostData({...postData, gender : e.target.value })}>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="None">Rather Not Say</option>
-                </select> */}
-
             <input type="submit" value="submit"/>
+            <p id="success"> </p>
+            <br></br>
+
 
         </form>
+
+
 
     </div>
     )

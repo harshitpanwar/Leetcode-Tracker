@@ -51,8 +51,8 @@ const User = ( {post} ) => {
 
             <div className='otherInfo'>
                 <div>
-                    <p>Acceptance</p>
-                    <p>{post.acceptance}</p>
+                    <p></p>
+                    <p></p>
                 </div>
                 <div>
                     <p>Total Submissions</p>

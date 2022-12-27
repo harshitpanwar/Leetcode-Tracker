@@ -6,20 +6,14 @@ import About from './components/About/About';
 import AddUser from './components/AddUser/AddUser';
 import { useDispatch } from 'react-redux';
 import { getPosts } from './actions/posts';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
 const App = () => {
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getPosts());
-  }, [dispatch]);
-
   return (
 
-    <BrowserRouter>
+    <Router>
 
    
       <Header/>
@@ -36,7 +30,7 @@ const App = () => {
 
 
 
-    </BrowserRouter>
+    </Router>
 
   )
 }
