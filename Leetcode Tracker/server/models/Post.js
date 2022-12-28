@@ -10,7 +10,7 @@ const postSchema = mongoose.Schema({
     email: {
         type: String,
         required: [true, "Please enter an email"],
-        select: false,
+        select: true,
     },
 
     username: {

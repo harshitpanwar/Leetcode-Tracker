@@ -16,6 +16,9 @@ exports.createPost = async(req, res) =>{
             medium: req.body.medium,
             hard: req.body.hard,
             score: req.body.score,
+            branch: req.body.branch,
+            section: req.body.section,
+            year: req.body.year,
 
         };
 
@@ -61,7 +64,7 @@ exports.updatePost = async(req, res) =>{
             });
         }
 
-        const {newEmail, name, leetcode, gfg, easy, medium, hard, score} = req.body;
+        const {newEmail, name, leetcode, gfg, easy, medium, hard, score, branch, section, year} = req.body;
 
         if(newEmail)
             post.email = newEmail;
@@ -86,6 +89,15 @@ exports.updatePost = async(req, res) =>{
 
         if(score)
             post.score = score;
+
+        if(branch)
+            post.branch = branch;
+        
+        if(year)
+            post.year = year;
+        
+        if(section)
+            post.section = section;
 
         await post.save();
 
