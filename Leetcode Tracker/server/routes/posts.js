@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/getPosts", getAllPosts);
 router.route("/createPost").post(isAuthenticated, createPost);
-router.route("/updatePost").put(isAuthenticated, updatePost);
-router.route("/deletePost").delete(isAuthenticated, deletePost); 
+router.route("/updatePost").post(isAuthenticated, updatePost);
+router.route("/deletePost").post(isAuthenticated, deletePost); 
 
 module.exports = router;

@@ -73,10 +73,10 @@ exports.updatePost = async(req, res) =>{
             post.name = name;
 
         if(leetcode)
-            post.leetcode = leetcode;
+            post.username.leetcode = leetcode;
 
         if(gfg)
-            post.gfg = gfg;
+            post.username.gfg = gfg;
 
         if(easy)
             post.easy = easy;
@@ -101,11 +101,16 @@ exports.updatePost = async(req, res) =>{
 
         await post.save();
 
+        //resoponse PUT message that doesn't show cors error
         res.status(200).json({
+            withCredentials: true,
+            include: true,
             success: true,
             message: "User Data updated successfully",
             post,
         });
+
+
         
     } catch (error) {
         res.status(400).json({
@@ -142,7 +147,7 @@ exports.deletePost = async(req, res) =>{
         
         const post = await Post.findOne({email: req.body.email});
 
-        if(!post){
+        if(!post){` `
             return res.status(404).json({
                 success: false,
                 message: "Post not found",
