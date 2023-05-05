@@ -1,4 +1,7 @@
 const Post = require("../models/Post");
+const {getLeetcodeUserData, getGFGUserData} = require("../helpers/postsHelper");
+
+const NUMBER_OF_USERS_PER_PAGE = 5;
 
 exports.createPost = async(req, res) =>{
 
@@ -124,7 +127,29 @@ exports.getAllPosts = async(req, res) =>{
 
     try {
 
-        const posts = await Post.find().sort({score: -1});
+        const {page, branch, year, section} = req.query;
+
+        //find all the posts of the given branch, year or section
+        //preparing conditions for the query
+        const conditions = {};
+
+        if(branch){
+            conditions.branch = branch;
+        }
+
+        if(year){
+            conditions.year = year;
+        }
+
+        if(section){
+            conditions.section = section;
+        }
+
+        const posts = await Post
+                            .find()
+                            .sort({score: -1})
+                            .limit(NUMBER_OF_USERS_PER_PAGE)
+                            .skip((page-1)*NUMBER_OF_USERS_PER_PAGE);
 
         res.status(200).json({
             success: true,
@@ -167,5 +192,72 @@ exports.deletePost = async(req, res) =>{
             message: error.message,
         });
     }
+
+}
+
+exports.userData = async(req, res) =>{
+
+    try{
+
+        const {website, username} = req.query;
+
+        if(!website || !username){
+            return res.status(400).json({
+                success: false,
+                message: "Invalid request",
+            });
+        }
+
+        let userData = null;
+        if(website==='Leetcode'){
+
+            userData = await getLeetcodeUserData(username);
+
+            //if username is wrong
+            if(userData.status===404){
+                return res.status(404).json({
+                    status: 404,
+                    message: userData.message,
+                });
+            }
+
+            return res.status(200).json({
+                status: 200,
+                userData:userData.data.data,
+            });
+
+        }
+        else if(website==='GFG'){
+
+            userData = await getGFGUserData(username);
+
+            if(userData.status===404){
+                return res.status(404).json({
+                    status: 404,
+                    message: userData.message,
+                });
+            }
+
+            return res.status(200).json({
+                status: 200,
+                data: userData.data,
+            });
+
+        }       
+        else{
+            return res.status(400).json({
+                status: 400,
+                message: "Wrong website name",
+            });
+        }
+
+    }
+    catch(error){
+        return res.status(400).json({
+            status: 400,
+            message: error.message,
+        });
+    }
+
 
 }

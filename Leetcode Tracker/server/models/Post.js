@@ -15,7 +15,6 @@ const postSchema = mongoose.Schema({
 
     username: {
         
-
         leetcode: {
             type:String,
             default: ""
