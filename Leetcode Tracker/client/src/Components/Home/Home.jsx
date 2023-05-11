@@ -5,6 +5,27 @@ import { getPosts } from '../../Actions/Post';
 
 const Home = () => {
 
+  //styles 
+
+  const styles={
+    mainHeading:`text-center text-5xl font-extrabold`,
+    innerText:`text-transparent bg-clip-text bg-gradient-to-r from-amber-400  to-neutral-950`,
+    perfText:`text-2xl my-3 ml-2 font-sans font-semibold`,
+    tableWrapper:`relative overflow-x-auto shadow-md sm:rounded-lg`,
+    table:`w-full text-sm text-left text-gray-500 dark:text-gray-400 tracking-wider`,
+    tableHeaderWrapper:`text-2xl text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400`,
+    rowWrapper:`even:bg-gray-50 odd:bg-slate-100 border-b dark:bg-gray-800 dark:border-gray-700 `,
+    studentName:`capitalize font-extrabold font-serif text-xl  px-4 py-2`,
+    tableValues:`uppercase font-semibold text-center py-3`,
+    score:`uppercase font-extrabold`,
+    evenBorder:`border-b bg-gray-50 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600`,
+    oddBorder:`"bg-white border-b dark:bg-gray-900 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600`,
+    SelectionWrapper:`grid grid-cols-2 mt-10`,
+    search:'mx-5',
+    dropDownButton:`text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Dropdown hover <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"`,
+
+  } 
+
   const [page, setPage] = useState(1);
   const [branch, setBranch] = useState('');
   const [year, setYear] = useState('');
@@ -45,22 +66,38 @@ const Home = () => {
   return (
     <div className='App'>
 
+      <h1 className={styles.mainHeading}>Welcome to <span className={styles.innerText}>Leetcode Tracker</span> </h1>
       {/* Search */}
-      <input type="text" value={query} onChange={handleSearch} placeholder="Search by name or email" />
-
-      {/* Filters */}
+      <div className={styles.SelectionWrapper}>
+          <form className={styles.search}>   
+        <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+        <div class="relative">
+            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            </div>
+            <input type="search" id="default-search" class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search by Student Name" required />
+            <button type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
+        </div>
+    </form>
+      <div className={styles.filter}>
+                  
       <select name="branch" value={branch} onChange={handleFilter}  >
         <option value="">All Branches</option>
         <option value="ISE">ISE</option>
         <option value="CSE">CSE</option>
+        <option value="ECE">ECE</option>
+        <option value="AIML">AIML</option>
         <option value="ETE">ETE</option>
+        <option value="EEE">EEE</option>
+        <option value="MECH">MECH</option>
+        <option value="CIVIL">CIVIL</option>
       </select>
 
       <select name="section" value={section} onChange={handleFilter}>
         <option value="">All Sections</option>
-        <option value="a">A</option>
-        <option value="b">B</option>
-        <option value="c">C</option>
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
       </select>
 
       <select name="year" value={year} onChange={handleFilter}>
@@ -70,22 +107,80 @@ const Home = () => {
         <option value="3">3rd Year</option>
         <option value="4">4th Year</option>
       </select>
+      </div>
 
-      <h1>Post Data</h1>
-      <ul>
-        { posts && posts.map((item) => (
-          <li key={item._id}>
-            <p>Name: {item.name}</p>
-            <p>Email: {item.email}</p>
-            <p>Branch: {item.branch}</p>
-            <p>Section: {item.section}</p>
-            <p>Year: {item.year}</p>
-            <p>Score: {item.score}</p>
-          </li>
-        ))}
-      </ul>
+        
+        
+      </div>
+     
 
-      
+
+
+      <h1 className={styles.perfText}>Performance of Students</h1>
+
+      <div className={styles.tableWrapper}>
+          <table className={styles.table}>
+            <thead className={styles.tableHeaderWrapper}>
+              <tr>
+            <th scope="col" className="px-6 py-3">
+                    Student Name
+            </th>
+            <th scope="col" className="px-6 py-3">
+                    Branch
+            </th>
+            <th scope="col" className="px-6 py-3">
+                    Year
+            </th>
+            <th scope="col" className="px-6 py-3">
+                    Section
+            </th>
+            <th scope="col" className="px-6 py-3">
+                    Easy
+            </th>
+            <th scope="col" className="px-6 py-3">
+                    Medium
+            </th>
+            <th scope="col" className="px-6 py-3">
+                    Hard
+            </th>
+            <th scope="col" className="px-6 py-3">
+                    Score
+            </th>
+            </tr>
+            </thead>
+            <tbody>
+              {posts && posts.map((item) => (
+                <tr className={styles.rowWrapper}>
+                  <th className={styles.studentName}>
+                      {item.name}
+                  </th>
+                  <td className={styles.tableValues}>
+                    {item.branch}
+                  </td>
+                  <td className={styles.tableValues}>
+                    {item.year}
+                  </td>
+                  <td className={styles.tableValues}>
+                    {item.section}
+                  </td>
+                  <td className={styles.tableValues}>
+                    {item.easy}
+                  </td>
+                  <td className={styles.tableValues}>
+                    {item.medium}
+                  </td>
+                  <td className={styles.tableValues}>
+                    {item.hard}
+                  </td>
+                  <td className={styles.score}>
+                    {item.score}
+                  </td>
+              </tr>
+              ) )}
+              
+            </tbody>
+          </table>
+      </div>
 
     </div>
   )
