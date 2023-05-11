@@ -10,6 +10,7 @@ export const postReducer = createReducer(initialState, {
     LoadPostSuccess: (state, action) => {
         state.loading = false;
         state.posts = action.payload;
+        state.count = action.count;
     },
     LoadPostFailure: (state, action) => {
         state.loading = false;

@@ -1,15 +1,15 @@
 import axios from 'axios';
 
-export const getPosts = (page, branch, year, section) => async (dispatch) => {
+export const getPosts = (page, branch, year, section, searchQuery) => async (dispatch) => {
 
     try {
         
         dispatch({type: 'LoadPostRequest'});
 
         //making our api call
-        const {data} = await axios.get(`http://localhost:4000/api/v1/getPosts?page=${page}&branch=${branch}&year=${year}&section=${section}`);
+        const {data} = await axios.get(`http://localhost:4000/api/v1/getPosts?page=${page}&branch=${branch}&year=${year}&section=${section}&searchQuery=${searchQuery}`);
 
-        dispatch({type: 'LoadPostSuccess', payload: data.posts});
+        dispatch({type: 'LoadPostSuccess', payload: data.posts, count: data.count});
 
     } catch (error) {
 

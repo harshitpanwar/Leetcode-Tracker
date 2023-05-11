@@ -127,7 +127,8 @@ exports.getAllPosts = async(req, res) =>{
 
     try {
 
-        const {page, branch, year, section} = req.query;
+        const {page, branch, year, section, searchQuery} = req.query;
+        const regex = new RegExp(searchQuery, 'i');
 
         //find all the posts of the given branch, year or section
         //preparing conditions for the query
@@ -145,15 +146,21 @@ exports.getAllPosts = async(req, res) =>{
             conditions.section = section;
         }
 
+
         const posts = await Post
                             .find(conditions)
                             .sort({score: -1})
                             .limit(NUMBER_OF_USERS_PER_PAGE)
                             .skip((page-1)*NUMBER_OF_USERS_PER_PAGE);
 
+        //getting the total number of documents which follow our conditions
+        const count = await Post.countDocuments(conditions);
+
         res.status(200).json({
             success: true,
             posts,
+            count
+            
         });
 
         
