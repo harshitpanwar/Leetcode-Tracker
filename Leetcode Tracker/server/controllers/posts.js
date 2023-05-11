@@ -129,7 +129,6 @@ exports.getAllPosts = async(req, res) =>{
 
         const {page, branch, year, section, searchQuery} = req.query;
         const regex = new RegExp(searchQuery, 'i');
-
         //find all the posts of the given branch, year or section
         //preparing conditions for the query
         const conditions = {};
@@ -146,6 +145,9 @@ exports.getAllPosts = async(req, res) =>{
             conditions.section = section;
         }
 
+        if(searchQuery){
+            conditions.name = { $regex: regex };
+        }
 
         const posts = await Post
                             .find(conditions)
