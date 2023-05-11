@@ -146,7 +146,7 @@ exports.getAllPosts = async(req, res) =>{
         }
 
         const posts = await Post
-                            .find()
+                            .find(conditions)
                             .sort({score: -1})
                             .limit(NUMBER_OF_USERS_PER_PAGE)
                             .skip((page-1)*NUMBER_OF_USERS_PER_PAGE);
