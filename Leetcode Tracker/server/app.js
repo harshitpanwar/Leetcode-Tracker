@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const cookieParser = require("cookie-parser");
-
+const cors = require('cors');
 
 //dotenv setup
 
@@ -9,7 +9,9 @@ if(process.env.NODE_ENV!=='production'){
     require("dotenv").config({path: "./config/config.env"});
 }
 
-
+app.use(cors({  
+    origin: 'http://localhost:5173'
+}));
 //using Middlewares
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
