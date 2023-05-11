@@ -1,7 +1,7 @@
 const Post = require("../models/Post");
 const {getLeetcodeUserData, getGFGUserData} = require("../helpers/postsHelper");
 
-const NUMBER_OF_USERS_PER_PAGE = 5;
+const NUMBER_OF_USERS_PER_PAGE = 10;
 
 exports.createPost = async(req, res) =>{
 

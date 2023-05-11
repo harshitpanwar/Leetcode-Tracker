@@ -1,6 +1,6 @@
 import React from 'react'
 // import leetCodeLogo from '../../../public/leetcode-logo.webp'
-const Header = () => {
+const Header = (props) => {
   const styles={
     navDiv:`bg-slate-200 border-gray-200`,
     wrapper:`max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4`,
@@ -9,8 +9,11 @@ const Header = () => {
     logoText:`self-center text-3xl font-bold whitespace-nowrap`,
     navUlWrapper:`flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white `,
     navItem:"block py-2 pl-3 pr-4 text-stone-800 text-lg hover:text-xl hover:text-bold hover:text-amber-400",
-    btnDesign:``
+    btnDesign:``,
+    authBtnDesign:`text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center type="button">Dropdown hover <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"`,
   }
+
+  const auth = props.auth;
   return (
     <div>
       <nav className={styles.navDiv}>
@@ -35,6 +38,16 @@ const Header = () => {
         <li>
           <a href="#" className={styles.navItem}><button className={styles.btnDesign}>Contact</button></a>
         </li>
+        {
+        //if authenticated then show logout button else show login button
+        auth?
+        <li>
+          <a href="#" className={styles.navItem}><button className={styles.authBtnDesign}>Logout</button></a>
+        </li>
+        :<li>
+          <a href="#" className={styles.navItem}><button className={styles.authBtnDesign}>Login</button></a>
+        </li>
+        }
       </ul>
     </div>
   </div>

@@ -60,7 +60,6 @@ const Home = () => {
     } else if (name === 'year') {
       setYear(value);
     } else if (name === 'search') {
-      console.log(value)
       setQuery(value);
     }
   }
@@ -69,10 +68,7 @@ const Home = () => {
     
     //if enter key is pressed or search button is clicked
     if (event.key === 'Enter'||event.type==='click') {
-
-      console.log("Enter key pressed")
       setSearchQuery(query);
-      
     }
 
   }
@@ -121,13 +117,8 @@ const Home = () => {
         <option value="4">4th Year</option>
       </select>
       </div>
-
-        
-        
+  
       </div>
-     
-
-
 
       <h1 className={styles.perfText}>Performance of Students</h1>
 

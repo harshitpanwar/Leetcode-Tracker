@@ -7,7 +7,7 @@ export const getPosts = (page, branch, year, section, searchQuery) => async (dis
         dispatch({type: 'LoadPostRequest'});
 
         //making our api call
-        const {data} = await axios.get(`http://localhost:4000/api/v1/getPosts?page=${page}&branch=${branch}&year=${year}&section=${section}&searchQuery=${searchQuery}`);
+        const {data} = await axios.get(`http://127.0.0.1:4000/api/v1/getPosts?page=${page}&branch=${branch}&year=${year}&section=${section}&searchQuery=${searchQuery}`);
         console.log(`http://localhost:4000/api/v1/getPosts?page=${page}&branch=${branch}&year=${year}&section=${section}&searchQuery=${searchQuery}`);
         dispatch({type: 'LoadPostSuccess', payload: data.posts, count: data.count});
 

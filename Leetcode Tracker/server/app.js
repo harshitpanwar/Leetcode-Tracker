@@ -10,7 +10,8 @@ if(process.env.NODE_ENV!=='production'){
 }
 
 app.use(cors({  
-    origin: 'http://127.0.0.1:5173'
+    origin: 'http://localhost:5173',
+    credentials: true
 }));
 //using Middlewares
 app.use(express.json());
@@ -18,13 +19,15 @@ app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 
 
-
-
 // app.use(function(req, res, next) {
-//   "Access-Control-Allow-Methods", "*";
+//     res.header('Access-Control-Allow-Origin', 'http://localhost:5173');
+//     res.header(
+//       'Access-Control-Allow-Headers',
+//       'Origin, X-Requested-With, Content-Type, Accept'
+//     );
 //     next();
 //   });
-
+  
 
 //importing our routes
 const post = require("./routes/posts");
