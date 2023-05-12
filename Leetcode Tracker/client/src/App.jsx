@@ -6,6 +6,7 @@ import Footer from './Components/Footer/Footer.jsx'
 import Login from './Components/Auth/Login/Login.jsx'
 import { useDispatch, useSelector } from 'react-redux'
 import { loadUser } from './Actions/User.js'
+import Post from './Components/Post/Post.jsx'
 
 function App() {
 
@@ -30,8 +31,9 @@ function App() {
 
           <Routes>
 
-            <Route path='/' element = { isAuthenticated?<Home/>:<Login/>} />
+            <Route path='/' element = { <Home/>} />
             <Route path='/login' element = {<Login/>} />
+            <Route path='/addPost' element = {<Post/>} />
 
           </Routes>
 

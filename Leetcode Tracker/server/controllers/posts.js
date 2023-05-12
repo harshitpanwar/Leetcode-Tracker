@@ -1,11 +1,76 @@
 const Post = require("../models/Post");
 const {getLeetcodeUserData, getGFGUserData} = require("../helpers/postsHelper");
+//import axios
+const axios = require('axios');
 
 const NUMBER_OF_USERS_PER_PAGE = 10;
 
 exports.createPost = async(req, res) =>{
 
     try {
+
+        //code to check if code already exists
+        // const doesExist = await Post.findOne({email: req.body.email});
+
+        // if(doesExist){
+        //     return res.status(400).json({
+        //         success: false,
+        //         message: "User already exists",
+        //     });
+        // }
+
+        const lcusername = req.body.leetcode,
+                gfgusername = req.body.gfg;
+        
+        if(!lcusername && !gfgusername){
+            return res.status(400).json({
+                success: false,
+                message: "Please enter atleast one username",
+            });
+        }
+
+        let lcData, gfgData;
+
+
+       
+        const lcUrl = `http://localhost:4000/api/v1/userData?website=Leetcode&username=${lcusername}`,
+            gfgUrl = `http://localhost:4000/api/v1/userData?website=GFG&username=${gfgusername}`;
+
+        //set jwt token in request header in axios
+
+        try {
+
+            if(lcusername)
+            lcData = await axios.get(lcUrl, {
+                headers: {
+                    Cookie: `token=${req.cookies.token}`,
+                }
+            });
+    
+        } catch (error) {
+
+            return res.status(404).json({
+                success: false,
+                message: "Invalid Leetcode Username",
+            });
+            
+        }
+
+        try {
+            if(gfgusername)
+            gfgData = await axios.get(gfgUrl, {
+                headers: {
+                    Cookie: `token=${req.cookies.token}`,
+                }
+            });
+      
+        } catch (error) {
+            return res.status(404).json({
+                success: false,
+                message: "Invalid GFG Username",
+            })
+        }
+        
         
         const postData = {
 
@@ -15,24 +80,16 @@ exports.createPost = async(req, res) =>{
                 leetcode: req.body.leetcode,
                 gfg: req.body.gfg,
             },
-            easy: req.body.easy,
-            medium: req.body.medium,
-            hard: req.body.hard,
-            score: req.body.score,
+            easy: lcData?.data?.data?.easy + gfgData?.data?.data?.easy,
+            medium: lcData?.data?.data?.medium + gfgData?.data?.data?.medium,
+            hard: lcData?.data?.data?.hard + gfgData?.data?.data?.hard,
+            score: lcData?.data?.data?.score + gfgData?.data?.data?.score,
             branch: req.body.branch,
             section: req.body.section,
             year: req.body.year,
 
         };
 
-        const doesExist = await Post.findOne({email: req.body.email});
-
-        if(doesExist){
-            return res.status(400).json({
-                success: false,
-                message: "User already exists",
-            });
-        }
 
         console.log("post data", postData);
 
@@ -48,7 +105,7 @@ exports.createPost = async(req, res) =>{
 
         res.status(400).json({
             success: false,
-            error: error.message,
+            error: error,
         })
         
     }
@@ -230,9 +287,22 @@ exports.userData = async(req, res) =>{
                 });
             }
 
+            const problemsArray = userData?.data?.data?.matchedUser?.submitStatsGlobal?.acSubmissionNum;
+            const sovledProblems = problemsArray[0]?.count,
+                    easy = problemsArray[1]?.count,
+                    medium = problemsArray[2]?.count,
+                    hard = problemsArray[3]?.count,
+                    score = easy*1 + medium*3 + hard*5;
+
             return res.status(200).json({
                 status: 200,
-                userData:userData.data.data,
+                data: {
+                    sovledProblems,
+                    easy,
+                    medium,
+                    hard,
+                    score,
+                }
             });
 
         }
@@ -247,9 +317,13 @@ exports.userData = async(req, res) =>{
                 });
             }
 
+            let problemsObject = userData?.data;
+
+            problemsObject.totalProblems = problemsObject.school + problemsObject.basic + problemsObject.easy + problemsObject.medium + problemsObject.hard;
+            problemsObject.score = problemsObject.school*0.5 + problemsObject.easy*1 + problemsObject.medium*3 + problemsObject.hard*5;
             return res.status(200).json({
                 status: 200,
-                data: userData.data,
+                data: problemsObject,
             });
 
         }       
