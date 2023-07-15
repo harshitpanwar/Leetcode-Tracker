@@ -49,7 +49,7 @@ exports.createPost = async(req, res) =>{
     
         } catch (error) {
 
-            return res.status(404).json({
+            return res.status(201).json({
                 success: false,
                 message: "Invalid Leetcode Username",
             });
@@ -65,7 +65,7 @@ exports.createPost = async(req, res) =>{
             });
       
         } catch (error) {
-            return res.status(404).json({
+            return res.status(201).json({
                 success: false,
                 message: "Invalid GFG Username",
             })
@@ -80,15 +80,18 @@ exports.createPost = async(req, res) =>{
                 leetcode: req.body.leetcode,
                 gfg: req.body.gfg,
             },
-            easy: lcData?.data?.data?.easy + gfgData?.data?.data?.easy,
-            medium: lcData?.data?.data?.medium + gfgData?.data?.data?.medium,
-            hard: lcData?.data?.data?.hard + gfgData?.data?.data?.hard,
-            score: lcData?.data?.data?.score + gfgData?.data?.data?.score,
+            easy: lcData?.data?.data?.easy ?? 0 + gfgData?.data?.data?.easy ?? 0,
+            medium: lcData?.data?.data?.medium ?? 0 + gfgData?.data?.data?.medium ?? 0,
+            hard: lcData?.data?.data?.hard ?? 0 + gfgData?.data?.data?.hard ?? 0,
+            score: lcData?.data?.data?.score ?? 0 + gfgData?.data?.data?.score ?? 0,
             branch: req.body.branch,
             section: req.body.section,
             year: req.body.year,
 
         };
+
+        console.log("lc data", lcData?.data?.data);
+        console.log("gfg data", gfgData?.data?.data);
 
 
         console.log("post data", postData);
@@ -97,6 +100,7 @@ exports.createPost = async(req, res) =>{
 
         res.status(201).json({
             success: true,
+            message: "User added successfully",
             post: post,
         });
 
