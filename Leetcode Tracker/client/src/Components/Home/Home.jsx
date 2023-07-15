@@ -2,6 +2,8 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPosts } from '../../Actions/Post';
+import defaultProfilePic from '../../assets/user.png';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
 
@@ -34,15 +36,17 @@ const Home = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const dispatch = useDispatch();
+  const Navigate = useNavigate();
 
   useEffect(() => {
       
-    console.log('useEffect called');
+    console.log('useEffect  fdsafsd called');
       dispatch(getPosts(page, branch, year, section,searchQuery));
   
   }, [dispatch, page, branch, year, section, searchQuery]);
   
   const {loading, posts, error} = useSelector(state => state.getPosts);
+  const {loading:userLoading, isAuthenticated} = useSelector(state => state.user);
 
   const handleSearch = (event) => {
     setQuery(event.target.value);
@@ -76,9 +80,6 @@ const Home = () => {
 
   return (
     <div className='App'>
-
-      <h1 className={styles.mainHeading}>Welcome to <span className={styles.innerText}>Leetcode Tracker</span> </h1>
-      {/* Search */}
       <div className={styles.SelectionWrapper}>
         <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
         <div class="relative">
@@ -104,9 +105,9 @@ const Home = () => {
 
       <select name="section" value={section} onChange={handleFilter}>
         <option value="">All Sections</option>
-        <option value="A">A</option>
-        <option value="B">B</option>
-        <option value="C">C</option>
+        <option value="a">A</option>
+        <option value="b">B</option>
+        <option value="c">C</option>
       </select>
 
       <select name="year" value={year} onChange={handleFilter}>
@@ -120,71 +121,172 @@ const Home = () => {
   
       </div>
 
-      <h1 className={styles.perfText}>Performance of Students</h1>
+      <section className="mx-auto w-full max-w-7xl px-4 py-4">
+        {userLoading ? null: isAuthenticated?
 
-      <div className={styles.tableWrapper}>
-          <table className={styles.table}>
-            <thead className={styles.tableHeaderWrapper}>
-              <tr>
-            <th scope="col" className="px-6 py-3">
-                    Student Name
-            </th>
-            <th scope="col" className="px-6 py-3">
-                    Branch
-            </th>
-            <th scope="col" className="px-6 py-3">
-                    Year
-            </th>
-            <th scope="col" className="px-6 py-3">
-                    Section
-            </th>
-            <th scope="col" className="px-6 py-3">
-                    Easy
-            </th>
-            <th scope="col" className="px-6 py-3">
-                    Medium
-            </th>
-            <th scope="col" className="px-6 py-3">
-                    Hard
-            </th>
-            <th scope="col" className="px-6 py-3">
-                    Score
-            </th>
-            </tr>
-            </thead>
-            <tbody>
-              {posts && posts.map((item) => (
-                <tr className={styles.rowWrapper}>
-                  <th className={styles.studentName}>
-                      {item.name}
-                  </th>
-                  <td className={styles.tableValues}>
-                    {item.branch}
-                  </td>
-                  <td className={styles.tableValues}>
-                    {item.year}
-                  </td>
-                  <td className={styles.tableValues}>
-                    {item.section}
-                  </td>
-                  <td className={styles.tableValues}>
-                    {item.easy}
-                  </td>
-                  <td className={styles.tableValues}>
-                    {item.medium}
-                  </td>
-                  <td className={styles.tableValues}>
-                    {item.hard}
-                  </td>
-                  <td className={styles.score}>
-                    {item.score}
-                  </td>
-              </tr>
-              ) )}
-              
-            </tbody>
-          </table>
-      </div>
+        <div className="flex flex-col space-y-4  md:flex-row md:items-center md:justify-between md:space-y-0">
+          <div>
+            <h2 className="text-lg font-semibold">Students</h2>
+            <p className="mt-1 text-sm text-gray-700">
+              This is a list of all student. You can add new students, edit or delete existing
+              ones.
+            </p>
+          </div>
+          <div>
+            <button
+              type="button"
+              className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+              onClick={(e)=> {e.preventDefault(); Navigate('/addPost')}}
+            >
+              Add new student
+            </button>
+          </div>
+        </div>
+        
+        :null
+
+        }
+        <div className="mt-6 flex flex-col">
+          <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+              <div className="overflow-hidden border border-gray-200 md:rounded-lg">
+                <table className="min-w-full divide-y divide-gray-200">
+                  <thead className="bg-gray-50">
+                    <tr>
+                      <th
+                        scope="col"
+                        className="px-4 py-3.5 text-left text-sm font-normal text-gray-700"
+                      >
+                        <span>Student</span>
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-12 py-3.5 text-left text-sm font-normal text-gray-700"
+                      >
+                        Branch, Year & Section
+                      </th>
+
+                      <th
+                        scope="col"
+                        className="px-4 py-3.5 text-left text-sm font-normal text-gray-700"
+                      >
+                        Leetcode
+                      </th>
+
+                      <th
+                        scope="col"
+                        className="px-4 py-3.5 text-left text-sm font-normal text-gray-700"
+                      >
+                        GFG
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-4 py-3.5 text-left text-sm font-normal text-gray-700"
+                      >
+                        Score
+                      </th>
+
+                      <th scope="col" className="relative px-4 py-3.5">
+                        <span className="sr-only">Edit</span>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200 bg-white">
+                    {posts && posts.map((person) => (
+                      <tr>
+                        <td className="whitespace-nowrap px-4 py-4">
+                          <div className="flex items-center">
+                            <div className="h-10 w-10 flex-shrink-0">
+                              <img
+                                className="h-10 w-10 rounded-full object-cover"
+                                src={defaultProfilePic}
+                                alt=""
+                              />
+                            </div>
+                            <div className="ml-4">
+                              <div className="text-sm font-medium text-gray-900">{person.name}</div>
+                              <div className="text-sm text-gray-700">{person.email}</div>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="whitespace-nowrap px-12 py-4">
+                          <div className="text-sm text-gray-900 ">{person.branch}</div>
+                          <div className="text-sm text-gray-700">{person.year}</div>
+                          <div className="text-sm text-gray-700">{person.section}</div>
+                        </td>
+                        <td className="whitespace-nowrap px-4 py-4">
+                          {
+                          person.username.leetcode?                          
+                          <span className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">
+                            Active
+                          </span>:
+                          <span className="inline-flex rounded-full bg-red-100 px-2 text-xs font-semibold leading-5 text-green-800">
+                            Not-Active
+                          </span>
+                          }
+                        </td>
+                        <td className="whitespace-nowrap px-4 py-4">
+                        {
+                          person.username.gfg?                          
+                          <span className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">
+                            Active
+                          </span>:
+                          <span className="inline-flex rounded-full bg-red-100 px-2 text-xs font-semibold leading-5 text-green-800">
+                            Not-Active
+                          </span>
+                          }
+                        </td>
+                        <td className="whitespace-nowrap px-4 py-4 text-sm text-gray-700">
+                          {person.score}
+                        </td>
+                        <td className="whitespace-nowrap px-4 py-4 text-right text-sm font-medium">
+                          <a href="#" className="text-gray-700">
+                            Edit
+                          </a>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="flex items-center justify-center pt-6">
+          <a href="#" className="mx-1 cursor-not-allowed text-sm font-semibold text-gray-900">
+            <span className="hidden lg:block">&larr; Previous</span>
+            <span className="block lg:hidden">&larr;</span>
+          </a>
+          <a
+            href="#"
+            className="mx-1 flex items-center rounded-md border border-gray-400 px-3 py-1 text-gray-900 hover:scale-105"
+          >
+            1
+          </a>
+          <a
+            href="#"
+            className="mx-1 flex items-center rounded-md border border-gray-400 px-3 py-1 text-gray-900 hover:scale-105"
+          >
+            2
+          </a>
+          <a
+            href="#"
+            className="mx-1 flex items-center rounded-md border border-gray-400 px-3 py-1 text-gray-900 hover:scale-105"
+          >
+            3
+          </a>
+          <a
+            href="#"
+            className="mx-1 flex items-center rounded-md border border-gray-400 px-3 py-1 text-gray-900 hover:scale-105"
+          >
+            4
+          </a>
+          <a href="#" className="mx-2 text-sm font-semibold text-gray-900">
+            <span className="hidden lg:block">Next &rarr;</span>
+            <span className="block lg:hidden">&rarr;</span>
+          </a>
+        </div>
+      </section>
 
     </div>
   )

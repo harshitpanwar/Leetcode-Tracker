@@ -56,4 +56,30 @@ export const loadUser = () => async (dispatch) => {
       });
     }
   };
+
+export const logoutUser = () => async (dispatch) => {
+
+    try {
+
+        dispatch({type: "LogoutUserRequest"});
+
+        const {data} = await axios.get("http://localhost:4000/api/v1/logout", {
+          withCredentials:true,
+          credentials: 'include',
+          headers:{
+              "Content-Type":"application/json"
+          },
+          
+      });
+    
+        dispatch({type: "LogoutUserSuccess", payload: data.user});
+
+    } catch (error) {
+        console.log(error)
+        dispatch({type: "LogoutUserFailure", payload: error.message});
+
+    }
+    
+
+}
   

@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { addPost } from '../../Actions/Post';
 
 const Post = () => {
 
@@ -11,6 +12,11 @@ const Post = () => {
     const [section, setSection] = useState('');
     const [leetcode, setLeetcode] = useState('');
     const [gfg, setGfg] = useState('');
+
+    const dispatch = useDispatch();
+    const selector = useSelector((state) => state.getPosts);
+
+    const {loading, post} = selector;
 
     const handleSubmit = (event) => {
 
@@ -34,19 +40,39 @@ const Post = () => {
         }
         document.getElementById('error').innerHTML = "";
 
-        const user = {
-            name,
-            email,
-            year,
-            branch,
-            section,
-            leetcode,
-            gfg
-        }
+        dispatch(addPost(name, email, year, branch, section, leetcode, gfg));
 
-        console.log(user);
 
     }
+
+    useEffect(()=>{
+
+      console.log('useEffect called')
+      console.log(post);
+      console.log(loading)
+      if(post!==undefined && post!==null && post!==''){
+        document.getElementById('error').innerHTML = post;
+        document.getElementById('error').style.color = 'green';
+        //center this p tag
+        document.getElementById('error').style.textAlign = 'center';
+        return;
+      }
+
+      if(loading){
+        document.getElementById('submit').disabled = true;
+
+        document.getElementById('error').innerHTML = "Loading...";
+        document.getElementById('error').style.color = 'blue';
+        //center this p tag
+        document.getElementById('error').style.textAlign = 'center';
+        return;
+      }
+
+      document.getElementById('error').innerHTML = "";
+      document.getElementById('submit').disabled = true;
+
+
+    }, [post, loading]);
 
 
   return (
@@ -69,7 +95,7 @@ const Post = () => {
             <option value="4">4th year</option>
             </select>
 
-            <label class="font-semibold text-sm text-gray-600 pb-1 block">Year</label>
+            <label class="font-semibold text-sm text-gray-600 pb-1 block">Branch</label>
             <select value={branch} onChange={(event) => setBranch(event.target.value)} class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full">
             <option value="">Select Branch</option>
             <option value="ISE">ISE</option>
@@ -82,7 +108,7 @@ const Post = () => {
             <option value="AIML">AIML</option>
             </select>
 
-          <label class="font-semibold text-sm text-gray-600 pb-1 block">Year</label>
+          <label class="font-semibold text-sm text-gray-600 pb-1 block">Section</label>
             <select value={section} onChange={(event) => setSection(event.target.value)} class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full">
             <option value="">Select Section</option>
             <option value="a">A</option>
@@ -97,8 +123,8 @@ const Post = () => {
 
           
           
-          <button type="button" onClick={handleSubmit} class="transition duration-200 bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block" >
-              <span class="inline-block mr-2">Submit</span>
+          <button type="button" onClick={handleSubmit} id="submit" class="transition duration-200 bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block" >
+              <span class="inline-block mr-2">{loading?'Loading...':'Submit'}</span>
               <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 inline-block">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
