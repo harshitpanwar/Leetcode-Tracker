@@ -7,12 +7,12 @@ export const getPosts = (page, branch, year, section, searchQuery) => async (dis
         dispatch({type: 'LoadPostRequest'});
 
         //making our api call
-        const {data} = await axios.get(`http://127.0.0.1:4000/api/v1/getPosts?page=${page}&branch=${branch}&year=${year}&section=${section}&searchQuery=${searchQuery}`, {
+        const {data} = await axios.get(`/api/v1/getPosts?page=${page}&branch=${branch}&year=${year}&section=${section}&searchQuery=${searchQuery}`, {
             withCredentials:true,
             credentials: 'include',
             
         });
-        console.log(`http://localhost:4000/api/v1/getPosts?page=${page}&branch=${branch}&year=${year}&section=${section}&searchQuery=${searchQuery}`);
+        console.log(`/api/v1/getPosts?page=${page}&branch=${branch}&year=${year}&section=${section}&searchQuery=${searchQuery}`);
         dispatch({type: 'LoadPostSuccess', payload: data.posts, count: data.count});
 
     } catch (error) {
@@ -31,7 +31,7 @@ export const addPost = (name, email, year, branch, section, leetcode, gfg) => as
         dispatch({type: 'AddPostRequest'});
 
         //making our api call
-        const {data} = await axios.post("http://localhost:4000/api/v1/createPost", {
+        const {data} = await axios.post("/api/v1/createPost", {
             name,
             email,
             year,

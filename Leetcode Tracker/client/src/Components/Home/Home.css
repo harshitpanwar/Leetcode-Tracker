@@ -1,0 +1,4 @@
+/* to stop the scrolling, once modal is loaded */
+.modal-open{
+    overflow: hidden
+}

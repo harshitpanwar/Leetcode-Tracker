@@ -2,8 +2,9 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPosts } from '../../Actions/Post';
-import defaultProfilePic from '../../assets/user.png';
 import { useNavigate } from 'react-router-dom';
+import {User} from 'lucide-react';
+import Add_Edit_User from './Add_Edit_User/Add_Edit_User';
 
 const Home = () => {
 
@@ -28,12 +29,15 @@ const Home = () => {
 
   } 
 
+
   const [page, setPage] = useState(1);
   const [branch, setBranch] = useState('');
   const [year, setYear] = useState('');
   const [section, setSection] = useState('');
   const [query, setQuery] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
+  const [showAddUser, setShowAddUser] = useState(false);
+  const [userEditProps, setUserEditProps] = useState({});
 
   const dispatch = useDispatch();
   const Navigate = useNavigate();
@@ -77,9 +81,19 @@ const Home = () => {
 
   }
 
+  const handleAddUser = () => {
+
+    setShowAddUser(false);
+
+  }
+
 
   return (
     <div className='App'>
+
+      {/* popUp modal */}
+      {showAddUser && <Add_Edit_User handleAddUser={handleAddUser} userEditProps={userEditProps}/>}
+
       <div className={styles.SelectionWrapper}>
         <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
         <div class="relative">
@@ -136,7 +150,8 @@ const Home = () => {
             <button
               type="button"
               className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-              onClick={(e)=> {e.preventDefault(); Navigate('/addPost')}}
+              // onClick={(e)=> {e.preventDefault(); Navigate('/addPost')}}
+              onClick={ (e)=> { e.preventDefault(); setUserEditProps({}); setShowAddUser(true);}}
             >
               Add new student
             </button>
@@ -197,11 +212,7 @@ const Home = () => {
                         <td className="whitespace-nowrap px-4 py-4">
                           <div className="flex items-center">
                             <div className="h-10 w-10 flex-shrink-0">
-                              <img
-                                className="h-10 w-10 rounded-full object-cover"
-                                src={defaultProfilePic}
-                                alt=""
-                              />
+                              <User/>
                             </div>
                             <div className="ml-4">
                               <div className="text-sm font-medium text-gray-900">{person.name}</div>
@@ -240,9 +251,11 @@ const Home = () => {
                           {person.score}
                         </td>
                         <td className="whitespace-nowrap px-4 py-4 text-right text-sm font-medium">
-                          <a href="#" className="text-gray-700">
+                          <button href="#" className="text-gray-700"
+                            onClick={(e) => {e.preventDefault(); console.log(person); setUserEditProps(person); setShowAddUser(true) }}
+                          >
                             Edit
-                          </a>
+                          </button>
                         </td>
                       </tr>
                     ))}

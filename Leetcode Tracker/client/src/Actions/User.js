@@ -6,7 +6,7 @@ export const loginUser = (email, password) => async (dispatch) => {
 
         dispatch({type: "LoginUserRequest"});
 
-        const {data} = await axios.post("http://localhost:4000/api/v1/login", {email, password}, {
+        const {data} = await axios.post("/api/v1/login", {email, password}, {
           withCredentials:true,
           credentials: 'include',
           headers:{
@@ -34,7 +34,7 @@ export const loadUser = () => async (dispatch) => {
         type: "LoadUserRequest",
       });
   
-      const { data } = await axios.get("http://localhost:4000/api/v1/me", {
+      const { data } = await axios.get("/api/v1/me", {
 
         withCredentials:true,
         credentials: 'include',
@@ -63,7 +63,7 @@ export const logoutUser = () => async (dispatch) => {
 
         dispatch({type: "LogoutUserRequest"});
 
-        const {data} = await axios.get("http://localhost:4000/api/v1/logout", {
+        const {data} = await axios.get("/api/v1/logout", {
           withCredentials:true,
           credentials: 'include',
           headers:{

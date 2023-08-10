@@ -5,6 +5,7 @@ import { logoutUser } from '../../Actions/User'
 import { useDispatch } from 'react-redux'
 import { Menu, X } from 'lucide-react'
 import gitHubLogo from '../../assets/github-mark.svg'
+import { Code2 } from 'lucide-react'
 
 // import leetCodeLogo from '../../../public/leetcode-logo.webp'
 const Header = (props) => {
@@ -101,7 +102,7 @@ const Header = (props) => {
       <div className={styles.innerContainer}>
         <div className={styles.logoContainer}>
           <span>
-          
+            <Code2/>
           </span>
           <span className={styles.logoText}>Code Tracker</span>
         </div>
