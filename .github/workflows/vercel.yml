@@ -11,8 +11,10 @@ jobs:
   Deploy-Production:
     runs-on: ubuntu-latest
     steps:
-        run: cd ./"LeetCode Tracker"
-        run: cd ./client
+      - name: Checkout Repository
+        run: |
+          cd LeetCode\ Tracker
+          cd client
       - uses: actions/checkout@v2
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
