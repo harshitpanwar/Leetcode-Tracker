@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "http://localhost:4000",
+        target: "ec2-16-171-177-8.eu-north-1.compute.amazonaws.com",
         secure: false,
       },
     },

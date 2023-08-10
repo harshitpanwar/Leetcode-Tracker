@@ -8,10 +8,10 @@ const cors = require('cors');
 if(process.env.NODE_ENV!=='production'){
     require("dotenv").config({path: "./config/config.env"});
 }
-
+https://github.com/harshitpanwar/Leetcode-Tracker.git/server
 app.use(cors({  
 
-    origin: ['http://localhost:5173', 'http://127.0.0.1:5173'],
+    origin: ['*'],
     credentials: true
 }));
 //using Middlewares
