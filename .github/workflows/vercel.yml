@@ -7,7 +7,7 @@ on:
     branches:
       - main
   paths:
-    - 'LeetCode Tracker/client/**'
+    - 'Leetcode Tracker/client/**'
 jobs:
   Deploy-Production:
     runs-on: ubuntu-latest
